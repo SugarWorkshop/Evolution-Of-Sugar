@@ -17,8 +17,8 @@ def versionProperties = new Properties();
 versionProperties.load(new StringReader(project.file('version.properties').getText('UTF-8')))
 
 version = versionProperties.getOrDefault('modVersion', 'unknown')
-group = 'io.github.sugarmgp.eoc'
-archivesBaseName = 'eoc'
+group = 'io.github.sugarmgp.eos'
+archivesBaseName = 'eos'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)
 
@@ -75,7 +75,7 @@ minecraft {
             property 'forge.logging.markers', 'REGISTRIES'
             property 'forge.logging.console.level', 'debug'
 
-            args '--mod', 'eoc', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
+            args '--mod', 'eos', '--all', '--output', file('src/generated/resources/'), '--existing', file('src/main/resources/')
 
             mods {
                 eoc {
@@ -100,11 +100,11 @@ jar {
     manifest {
         attributes([
                 "Specification-Title"     : project.name,
-                "Specification-Vendor"    : "eoc",
+                "Specification-Vendor"    : "eos",
                 "Specification-Version"   : "1",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
-                "Implementation-Vendor"   : "eoc",
+                "Implementation-Vendor"   : "eos",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
     }

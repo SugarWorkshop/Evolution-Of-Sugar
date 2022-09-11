@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "eos:cuckoo_block"
+    }
+  ],
+  "result": {
+    "item": "eos:cuckoo_ingot",
+    "count": 9
+  }
+}

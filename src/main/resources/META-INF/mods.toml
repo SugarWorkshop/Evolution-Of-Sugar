@@ -21,11 +21,11 @@ modId = "eoc" #mandatory
 # see the associated build.gradle script for how to populate this completely automatically during a build
 version = "${version}" #mandatory
 # A display name for the mod
-displayName = "Evolution Of Cuckoo" #mandatory
+displayName = "Evolution Of Sugar" #mandatory
 # A URL to query for updates for this mod. See the JSON update specification https://mcforge.readthedocs.io/en/latest/gettingstarted/autoupdate/
 #updateJSONURL="https://change.me.example.invalid/updates.json" #optional
 # A URL for the "homepage" for this mod, displayed in the mod UI
-displayURL = "https://github.com/SugarMGP/Evolution-Of-Cuckoo/tree/1.16.5/" #optional
+displayURL = "https://github.com/SugarWorkshop/Evolution-Of-Sugar/" #optional
 # A file name (in the root of the mod JAR) containing a logo for display
 #logoFile="eoc.png" #optional
 # A text field displayed in the mod UI
@@ -34,7 +34,7 @@ displayURL = "https://github.com/SugarMGP/Evolution-Of-Cuckoo/tree/1.16.5/" #opt
 authors = "SugarMGP" #optional
 # The description text for the mod (multi line!) (#mandatory)
 description = '''
-    A mod that commemorate the Cuckoo Dev Team's members.
+    A mod that commemorate the Sugar Meow Group's members.
 '''
 # A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
 [[dependencies.eoc]] #optional

@@ -1,7 +1,7 @@
 # This workflow will build a Java project with Gradle
 # For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
 
-name: EOC Snapshot Build
+name: EOS Snapshot Build
 
 on: [ push ]
 
@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clone EOC repository
+      - name: Clone EOS repository
         uses: actions/checkout@v2
         with:
-          repository: SugarMGP/Evolution-Of-Cuckoo
+          repository: SugarWorkshop/Evolution-Of-Sugar
           ref: 1.16.5
-          path: EOC-1.16
+          path: EOS-1.16
 
       - name: Set up JDK 1.8
         uses: actions/setup-java@v1
@@ -23,22 +23,22 @@ jobs:
           java-version: 1.8
 
       - name: Grant execute permission for gradlew
-        run: chmod +x ./EOC-1.16/gradlew
+        run: chmod +x ./EOS-1.16/gradlew
 
       - name: Build
-        run: cd ./EOC-1.16/ && ./gradlew build
+        run: cd ./EOS-1.16/ && ./gradlew build
 
       - uses: actions/upload-artifact@v2
         with:
-          name: EOC Snapshot
-          path: ./EOC-1.16/build/libs
+          name: EOS Snapshot
+          path: ./EOS-1.16/build/libs
 
       - name: Package Release
         if: ${{github.event_name == 'push' && startsWith(github.ref, 'refs/tags/')}}
         run: |
-          mkdir EOC-Build
-          mv ./EOC-1.16/build/libs/* ./EOC-Build
-          tar -cvf EOC-Build.tar ./EOC-Build
+          mkdir EOS-Build
+          mv ./EOS-1.16/build/libs/* ./EOS-Build
+          tar -cvf EOS-Build.tar ./EOS-Build
 
       - name: Create a new GitHub release if a new tag is pushed
         uses: softprops/action-gh-release@v0.1.5
@@ -47,7 +47,7 @@ jobs:
           GITHUB_TOKEN: ${{secrets.GITHUB_TOKEN}}
         with:
           prerelease: true
-          files: EOC-Build.tar
+          files: EOS-Build.tar
           body: |
             ## 更新日志
             * 这是 GitHub Action 自动化部署，更新日志将会手动更新。

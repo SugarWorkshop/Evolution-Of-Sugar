@@ -1,0 +1,23 @@
+{
+  "eos.welcome": "欢迎游玩 Evolution Of Sugar, %s.",
+  "eos.book": "EOC手册",
+  "item.eos.cuckoo_ingot": "咕咕锭",
+  "item.eos.funny_apple": "滑稽果",
+  "item.eos.funny_ingot": "滑稽锭",
+  "item.eos.cuckoo_axe": "咕咕斧",
+  "item.eos.cuckoo_pickaxe": "咕咕镐",
+  "item.eos.cuckoo_sword": "咕咕剑",
+  "item.eos.cuckoo_hoe": "咕咕锄",
+  "item.eos.cuckoo_shovel": "咕咕铲",
+  "item.eos.funny_helmet": "滑稽头盔",
+  "item.eos.funny_chestplate": "滑稽胸甲",
+  "item.eos.funny_leggings": "滑稽护腿",
+  "item.eos.funny_boots": "滑稽靴子",
+  "item.eos.sugarmgp_spawn_egg": "SugarMGP刷怪蛋",
+  "block.eos.funny_ore": "滑稽矿石",
+  "block.eos.cuckoo_ore": "咕咕矿石",
+  "block.eos.funny_block": "滑稽块",
+  "block.eos.cuckoo_block": "咕咕块",
+  "entity.eos.sugarmgp": "SugarMGP",
+  "itemGroup.eos_group": "Evolution Of Sugar"
+}

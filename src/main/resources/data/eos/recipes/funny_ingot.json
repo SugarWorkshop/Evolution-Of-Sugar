@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "eos:funny_block"
+    }
+  ],
+  "result": {
+    "item": "eos:funny_ingot",
+    "count": 9
+  }
+}

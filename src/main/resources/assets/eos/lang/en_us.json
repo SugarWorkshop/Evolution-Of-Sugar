@@ -1,0 +1,23 @@
+{
+  "eos.welcome": "Welcome to Evolution Of Sugar, %s.",
+  "eos.book": "EOS Guide Book",
+  "item.eos.cuckoo_ingot": "Cuckoo Ingot",
+  "item.eos.funny_apple": "Funny Apple",
+  "item.eos.funny_ingot": "Funny Ingot",
+  "item.eos.cuckoo_axe": "Cuckoo Axe",
+  "item.eos.cuckoo_pickaxe": "Cuckoo Pickaxe",
+  "item.eos.cuckoo_sword": "Cuckoo Sword",
+  "item.eos.cuckoo_hoe": "Cuckoo Hoe",
+  "item.eos.cuckoo_shovel": "Cuckoo Shovel",
+  "item.eos.funny_helmet": "Funny Helmet",
+  "item.eos.funny_chestplate": "Funny Chestplate",
+  "item.eos.funny_leggings": "Funny Leggings",
+  "item.eos.funny_boots": "Funny Boots",
+  "item.eos.sugarmgp_spawn_egg": "SugarMGP Spawn Egg",
+  "block.eos.funny_ore": "Funny Ore",
+  "block.eos.cuckoo_ore": "Cuckoo Ore",
+  "block.eos.funny_block": "Funny Block",
+  "block.eos.cuckoo_block": "Cuckoo Block",
+  "entity.eos.sugarmgp": "SugarMGP",
+  "itemGroup.eos_group": "Evolution Of Sugar"
+}

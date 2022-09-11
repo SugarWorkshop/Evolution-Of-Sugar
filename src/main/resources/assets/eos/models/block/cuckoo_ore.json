@@ -1,0 +1,12 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "particle": "eos:block/cuckoo_ore",
+    "down": "eos:block/cuckoo_ore_up_down",
+    "up": "eos:block/cuckoo_ore_up_down",
+    "north": "eos:block/cuckoo_ore",
+    "south": "eos:block/cuckoo_ore",
+    "west": "eos:block/cuckoo_ore",
+    "east": "eos:block/cuckoo_ore"
+  }
+}
