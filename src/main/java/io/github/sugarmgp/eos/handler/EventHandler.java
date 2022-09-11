@@ -14,7 +14,7 @@ public class EventHandler {
         Entity entity = event.getEntity();
         if (entity instanceof PlayerEntity && !entity.world.isRemote) {
             PlayerEntity player = (PlayerEntity) entity;
-            String message = "eoc.welcome";
+            String message = "eos.welcome";
             TranslationTextComponent text = new TranslationTextComponent(message, player.getDisplayName());
             player.sendStatusMessage(text, false);
         }
