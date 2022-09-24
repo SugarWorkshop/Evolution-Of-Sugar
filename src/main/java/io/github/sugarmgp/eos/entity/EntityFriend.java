@@ -46,7 +46,6 @@ public class EntityFriend extends TameableEntity {
     public EntityFriend(EntityType<? extends TameableEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
         this.setTamed(false);
-        this.setChild(false);
     }
 
     public static AttributeModifierMap.MutableAttribute createDefaultAttributes() {
@@ -224,6 +223,9 @@ public class EntityFriend extends TameableEntity {
     @Override
     @Nullable
     public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        if (spawnDataIn == null) {
+            spawnDataIn = new AgeableEntity.AgeableData(false);
+        }
         int rank = EnumFriendRanks.randomGetKey(this.rand);
         int member = EnumFriendMembers.randomGetKey(this.rand);
         this.setRank(rank);
