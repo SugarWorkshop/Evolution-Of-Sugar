@@ -5,10 +5,7 @@ import io.github.sugarmgp.eos.handler.ItemHandler;
 import io.github.sugarmgp.eos.util.EnumFriendMembers;
 import io.github.sugarmgp.eos.util.EnumFriendRanks;
 import net.minecraft.enchantment.Enchantments;
-import net.minecraft.entity.AgeableEntity;
-import net.minecraft.entity.EntityType;
-import net.minecraft.entity.LivingEntity;
-import net.minecraft.entity.MobEntity;
+import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
@@ -33,6 +30,8 @@ import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.world.DifficultyInstance;
+import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -48,10 +47,6 @@ public class EntityFriend extends TameableEntity {
         super(typeIn, worldIn);
         this.setTamed(false);
         this.setChild(false);
-        this.setCustomName(ITextComponent.getTextComponentOrEmpty(this.getMember().name()));
-        this.setExperiencePoints();
-        this.setItem(this.getRank().getHand(), this.getRank().getFeet());
-        this.changeAttributes();
     }
 
     public static AttributeModifierMap.MutableAttribute createDefaultAttributes() {
@@ -59,12 +54,6 @@ public class EntityFriend extends TameableEntity {
                 .createMutableAttribute(Attributes.MOVEMENT_SPEED, 0.7D)
                 .createMutableAttribute(Attributes.MAX_HEALTH, 30.0D)
                 .createMutableAttribute(Attributes.ATTACK_DAMAGE, 1.0D);
-    }
-
-    protected void changeAttributes() { //在生成后覆盖属性
-        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(this.getRank().getMaxHealth());
-        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(this.getRank().getAttackDamage());
-        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(this.getRank().getMovementSpeed());
     }
 
     protected void registerGoals() {
@@ -187,12 +176,23 @@ public class EntityFriend extends TameableEntity {
         return EnumFriendRanks.getByKey(this.dataManager.get(RANK));
     }
 
+    protected void setRank(int rankIn) {
+        this.dataManager.set(RANK, rankIn);
+        EnumFriendRanks rank = EnumFriendRanks.getByKey(rankIn);
+        this.experienceValue = rank.getExperienceValue();
+        this.setItem(rank.getHand(), rank.getFeet());
+        this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(rank.getMaxHealth());
+        this.getAttribute(Attributes.ATTACK_DAMAGE).setBaseValue(rank.getAttackDamage());
+        this.getAttribute(Attributes.MOVEMENT_SPEED).setBaseValue(rank.getMovementSpeed());
+    }
+
     public EnumFriendMembers getMember() {
         return EnumFriendMembers.getByKey(this.dataManager.get(MEMBER));
     }
 
-    protected void setExperiencePoints() {
-        this.experienceValue = this.getRank().getExperienceValue();
+    protected void setMember(int memberIn) {
+        this.dataManager.set(MEMBER, memberIn);
+        this.setCustomName(ITextComponent.getTextComponentOrEmpty(EnumFriendMembers.getByKey(memberIn).name()));
     }
 
     @Override
@@ -203,14 +203,8 @@ public class EntityFriend extends TameableEntity {
     @Override
     protected void registerData() {
         super.registerData();
-        int rank = 2;
-        int member = 0;
-        if (!world.isRemote()) {
-            rank = EnumFriendRanks.randomGetKey();
-            member = EnumFriendMembers.randomGetKey();
-        }
-        this.dataManager.register(RANK, rank);
-        this.dataManager.register(MEMBER, member);
+        this.dataManager.register(RANK, 2);
+        this.dataManager.register(MEMBER, 0);
     }
 
     @Override
@@ -225,6 +219,16 @@ public class EntityFriend extends TameableEntity {
         super.writeAdditional(compound);
         compound.putInt("Rank", this.dataManager.get(RANK));
         compound.putInt("Member", this.dataManager.get(MEMBER));
+    }
+
+    @Override
+    @Nullable
+    public ILivingEntityData onInitialSpawn(IServerWorld worldIn, DifficultyInstance difficultyIn, SpawnReason reason, @Nullable ILivingEntityData spawnDataIn, @Nullable CompoundNBT dataTag) {
+        int rank = EnumFriendRanks.randomGetKey(this.rand);
+        int member = EnumFriendMembers.randomGetKey(this.rand);
+        this.setRank(rank);
+        this.setMember(member);
+        return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
     @Override
