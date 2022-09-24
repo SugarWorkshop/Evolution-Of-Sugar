@@ -16,37 +16,19 @@ public class ModelFriend extends BipedModel {
     public final ModelRenderer bipedLeftLegwear;
     public final ModelRenderer bipedRightLegwear;
     public final ModelRenderer bipedBodyWear;
-    private final boolean smallArms;
     private List<ModelRenderer> modelRenderers = Lists.newArrayList();
 
-    public ModelFriend(float modelSize, boolean smallArmsIn) {
+    public ModelFriend(float modelSize) {
         super(modelSize, 0.0F, 64, 64);
-        this.smallArms = smallArmsIn;
-        if (smallArmsIn) {
-            this.bipedLeftArm = new ModelRenderer(this, 32, 48);
-            this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize);
-            this.bipedLeftArm.setRotationPoint(5.0F, 2.5F, 0.0F);
-            this.bipedRightArm = new ModelRenderer(this, 40, 16);
-            this.bipedRightArm.addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize);
-            this.bipedRightArm.setRotationPoint(-5.0F, 2.5F, 0.0F);
-            this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
-            this.bipedLeftArmwear.addBox(-1.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize + 0.25F);
-            this.bipedLeftArmwear.setRotationPoint(5.0F, 2.5F, 0.0F);
-            this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
-            this.bipedRightArmwear.addBox(-2.0F, -2.0F, -2.0F, 3.0F, 12.0F, 4.0F, modelSize + 0.25F);
-            this.bipedRightArmwear.setRotationPoint(-5.0F, 2.5F, 10.0F);
-        } else {
-            this.bipedLeftArm = new ModelRenderer(this, 32, 48);
-            this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize);
-            this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
-            this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
-            this.bipedLeftArmwear.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
-            this.bipedLeftArmwear.setRotationPoint(5.0F, 2.0F, 0.0F);
-            this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
-            this.bipedRightArmwear.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
-            this.bipedRightArmwear.setRotationPoint(-5.0F, 2.0F, 10.0F);
-        }
-
+        this.bipedLeftArm = new ModelRenderer(this, 32, 48);
+        this.bipedLeftArm.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize);
+        this.bipedLeftArm.setRotationPoint(5.0F, 2.0F, 0.0F);
+        this.bipedLeftArmwear = new ModelRenderer(this, 48, 48);
+        this.bipedLeftArmwear.addBox(-1.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedLeftArmwear.setRotationPoint(5.0F, 2.0F, 0.0F);
+        this.bipedRightArmwear = new ModelRenderer(this, 40, 32);
+        this.bipedRightArmwear.addBox(-3.0F, -2.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize + 0.25F);
+        this.bipedRightArmwear.setRotationPoint(-5.0F, 2.0F, 10.0F);
         this.bipedLeftLeg = new ModelRenderer(this, 16, 48);
         this.bipedLeftLeg.addBox(-2.0F, 0.0F, -2.0F, 4.0F, 12.0F, 4.0F, modelSize);
         this.bipedLeftLeg.setRotationPoint(1.9F, 12.0F, 0.0F);

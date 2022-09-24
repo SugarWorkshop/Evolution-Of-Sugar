@@ -4,22 +4,7 @@ import java.util.Random;
 
 public enum EnumFriendMembers {
 
-    SugarMGP(false),
-    KitraMGP(false),
-    chihuoQwQ(false),
-    jujixiguan(false),
-    SEALchanPS(false),
-    Tank1014(false),
-    Wubaozi123(false),
-    xtexChooser(false);
-
-    private final boolean smallArm;
-    private final String id;
-
-    EnumFriendMembers(boolean smallArmIn) {
-        this.smallArm = smallArmIn;
-        this.id = this.name().toLowerCase();
-    }
+    SugarMGP, KitraMGP, chihuoQwQ, jujixiguan, SEALchanPS, Tank1014, Wubaozi123, xtexChooser;
 
     public static EnumFriendMembers getByKey(int key) {
         return EnumFriendMembers.values()[key];
@@ -31,15 +16,11 @@ public enum EnumFriendMembers {
         return num;
     }
 
-    public boolean getSmallArm() {
-        return this.smallArm;
-    }
-
     public int getKey() {
         return this.ordinal();
     }
 
     public String getId() {
-        return this.id;
+        return this.name().toLowerCase();
     }
 }

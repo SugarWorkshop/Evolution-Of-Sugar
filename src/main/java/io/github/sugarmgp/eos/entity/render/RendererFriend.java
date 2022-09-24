@@ -20,7 +20,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 @OnlyIn(Dist.CLIENT)
 public class RendererFriend extends LivingRenderer {
     public RendererFriend(EntityRendererManager managerIn) {
-        super(managerIn, new ModelFriend(0.0F, false), 0.5F);
+        super(managerIn, new ModelFriend(0.0F), 0.5F);
         this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
         this.addLayer(new HeldItemLayer<>(this));
         this.addLayer(new ArrowLayer<>(this));
