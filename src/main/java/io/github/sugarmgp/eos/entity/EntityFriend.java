@@ -2,7 +2,8 @@ package io.github.sugarmgp.eos.entity;
 
 import com.google.common.base.Predicate;
 import io.github.sugarmgp.eos.handler.ItemHandler;
-import io.github.sugarmgp.eos.util.EnumNPCRank;
+import io.github.sugarmgp.eos.util.EnumFriendMembers;
+import io.github.sugarmgp.eos.util.EnumFriendRanks;
 import net.minecraft.enchantment.Enchantments;
 import net.minecraft.entity.AgeableEntity;
 import net.minecraft.entity.EntityType;
@@ -31,6 +32,7 @@ import net.minecraft.potion.Effects;
 import net.minecraft.util.ActionResultType;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
+import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
@@ -38,12 +40,15 @@ import net.minecraftforge.fml.network.NetworkHooks;
 import javax.annotation.Nullable;
 import java.util.Random;
 
-public class EntityNPCBase extends TameableEntity {
-    private static final DataParameter<Integer> RANK = EntityDataManager.createKey(EntityNPCBase.class, DataSerializers.VARINT);
+public class EntityFriend extends TameableEntity {
+    private static final DataParameter<Integer> RANK = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> MEMBER = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
 
-    public EntityNPCBase(EntityType<? extends TameableEntity> typeIn, World worldIn) {
+    public EntityFriend(EntityType<? extends TameableEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
         this.setTamed(false);
+        this.setChild(false);
+        this.setCustomName(ITextComponent.getTextComponentOrEmpty(this.getMember().name()));
         this.setExperiencePoints();
         this.setItem(this.getRank().getHand(), this.getRank().getFeet());
         this.changeAttributes();
@@ -125,8 +130,8 @@ public class EntityNPCBase extends TameableEntity {
 
     public boolean shouldAttackEntity(LivingEntity target, LivingEntity owner) { //从WolfEntity修改来的
         if (!(target instanceof CreeperEntity) && !(target instanceof GhastEntity)) {
-            if (target instanceof EntityNPCBase) {
-                EntityNPCBase entity = (EntityNPCBase) target;
+            if (target instanceof EntityFriend) {
+                EntityFriend entity = (EntityFriend) target;
                 return !entity.isTamed() || entity.getOwner() != owner;
             } else if (target instanceof PlayerEntity && owner instanceof PlayerEntity && !((PlayerEntity) owner).canAttackPlayer((PlayerEntity) target)) {
                 return false;
@@ -148,7 +153,7 @@ public class EntityNPCBase extends TameableEntity {
         }
 
         int regenerationLevel = this.getRank().getRegenerationLevel();
-        if (!this.isPotionActive(Effects.REGENERATION) && regenerationLevel >= 0) { //给NPC添加生命恢复
+        if (regenerationLevel >= 0 && !this.isPotionActive(Effects.REGENERATION)) { //给NPC添加生命恢复
             this.addPotionEffect(new EffectInstance(Effects.REGENERATION, 72000, regenerationLevel, false, false));
         }
 
@@ -178,8 +183,12 @@ public class EntityNPCBase extends TameableEntity {
         return this.experienceValue + (int) (new Random().nextInt(10) / 9.0 * 5);
     }
 
-    public EnumNPCRank getRank() {
-        return EnumNPCRank.getByKey(this.dataManager.get(RANK));
+    public EnumFriendRanks getRank() {
+        return EnumFriendRanks.getByKey(this.dataManager.get(RANK));
+    }
+
+    public EnumFriendMembers getMember() {
+        return EnumFriendMembers.getByKey(this.dataManager.get(MEMBER));
     }
 
     protected void setExperiencePoints() {
@@ -187,27 +196,35 @@ public class EntityNPCBase extends TameableEntity {
     }
 
     @Override
-    public EntityNPCBase func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
+    public EntityFriend func_241840_a(ServerWorld p_241840_1_, AgeableEntity p_241840_2_) {
         return null;
     }
 
     @Override
     protected void registerData() {
         super.registerData();
-        EnumNPCRank rank = EnumNPCRank.randomGet(); //随机选择Rank
-        this.dataManager.register(RANK, rank.getKey());
+        int rank = 2;
+        int member = 0;
+        if (!world.isRemote()) {
+            rank = EnumFriendRanks.randomGetKey();
+            member = EnumFriendMembers.randomGetKey();
+        }
+        this.dataManager.register(RANK, rank);
+        this.dataManager.register(MEMBER, member);
     }
 
     @Override
     public void readAdditional(CompoundNBT compound) {
         super.readAdditional(compound);
         this.dataManager.set(RANK, compound.getInt("Rank"));
+        this.dataManager.set(MEMBER, compound.getInt("Member"));
     }
 
     @Override
     public void writeAdditional(CompoundNBT compound) {
         super.writeAdditional(compound);
         compound.putInt("Rank", this.dataManager.get(RANK));
+        compound.putInt("Member", this.dataManager.get(MEMBER));
     }
 
     @Override

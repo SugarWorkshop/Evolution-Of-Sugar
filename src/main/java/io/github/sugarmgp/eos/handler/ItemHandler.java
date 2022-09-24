@@ -35,7 +35,7 @@ public class ItemHandler {
     public static final RegistryObject<Item> itemFunnyHelmet = ITEMS.register("funny_helmet", ItemFunnyHelmet::new);
     public static final RegistryObject<Item> itemFunnyLeggings = ITEMS.register("funny_leggings", ItemFunnyLeggings::new);
 
-    public static final RegistryObject<SpawnEggItem> itemSugarMGPSpawnEgg = ITEMS.register("sugarmgp_spawn_egg", () -> new ForgeSpawnEggItem(EntityHandler.entitySugarMGP, 0xB3FFFF, 0x4D94FF, new Item.Properties().group(EOS.ITEMGROUP)));
+    public static final RegistryObject<SpawnEggItem> itemFriendSpawnEgg = ITEMS.register("friend_spawn_egg", () -> new ForgeSpawnEggItem(EntityHandler.entityFriend, 0xB3FFFF, 0x4D94FF, new Item.Properties().group(EOS.ITEMGROUP)));
 
     public static RegistryObject<Item> itemFunnyOre = ITEMS.register("funny_ore", () -> {
         return new BlockItem(BlockHandler.blockFunnyOre.get(), new Item.Properties().group(EOS.ITEMGROUP));

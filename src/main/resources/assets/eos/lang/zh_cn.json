@@ -13,11 +13,10 @@
   "item.eos.funny_chestplate": "滑稽胸甲",
   "item.eos.funny_leggings": "滑稽护腿",
   "item.eos.funny_boots": "滑稽靴子",
-  "item.eos.sugarmgp_spawn_egg": "SugarMGP刷怪蛋",
+  "item.eos.friend_spawn_egg": "伙伴刷怪蛋",
   "block.eos.funny_ore": "滑稽矿石",
   "block.eos.cuckoo_ore": "咕咕矿石",
   "block.eos.funny_block": "滑稽块",
   "block.eos.cuckoo_block": "咕咕块",
-  "entity.eos.sugarmgp": "SugarMGP",
   "itemGroup.eos_group": "Evolution Of Sugar"
 }

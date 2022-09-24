@@ -8,10 +8,11 @@ import net.minecraft.particles.ParticleTypes;
 
 import java.util.Random;
 
-public enum EnumNPCRank {
-    A(25, 28.0D, 2.0D, 0.8D, ParticleTypes.FLAME, 2, Items.NETHERITE_SWORD, Items.NETHERITE_BOOTS),
-    B(20, 24.0D, 1.5D, 0.75D, ParticleTypes.INSTANT_EFFECT, 1, ItemHandler.itemCuckooSword.get(), ItemHandler.itemFunnyBoots.get()),
-    C(15, 20.0D, 1.0D, 0.7D, null, 0, Items.STONE_SWORD, Items.CHAINMAIL_BOOTS);
+public enum EnumFriendRanks {
+
+    A(25, 28.0D, 2.0D, 0.8D, ParticleTypes.FLAME, 1, Items.NETHERITE_SWORD, Items.NETHERITE_BOOTS),
+    B(20, 24.0D, 1.5D, 0.75D, ParticleTypes.INSTANT_EFFECT, 0, ItemHandler.itemCuckooSword.get(), ItemHandler.itemFunnyBoots.get()),
+    C(15, 20.0D, 1.0D, 0.7D, null, -1, Items.STONE_SWORD, Items.CHAINMAIL_BOOTS);
 
     private final int experienceValue;
     private final double maxHealth;
@@ -22,7 +23,7 @@ public enum EnumNPCRank {
     private final Item hand;
     private final Item feet;
 
-    EnumNPCRank(int experienceValue, double maxHealth, double attackDamage, double movementSpeed, BasicParticleType particleType, int regenerationLevel, Item hand, Item feet) {
+    EnumFriendRanks(int experienceValue, double maxHealth, double attackDamage, double movementSpeed, BasicParticleType particleType, int regenerationLevel, Item hand, Item feet) {
         this.experienceValue = experienceValue;
         this.maxHealth = maxHealth;
         this.attackDamage = attackDamage;
@@ -33,18 +34,18 @@ public enum EnumNPCRank {
         this.feet = feet;
     }
 
-    public static EnumNPCRank getByKey(int key) {
-        return EnumNPCRank.values()[key];
+    public static EnumFriendRanks getByKey(int key) {
+        return EnumFriendRanks.values()[key];
     }
 
-    public static EnumNPCRank randomGet() {
+    public static int randomGetKey() {
         int a = new Random().nextInt(100);
         if (a < 10) {
-            return EnumNPCRank.A;
+            return EnumFriendRanks.A.getKey();
         } else if (a < 30) {
-            return EnumNPCRank.B;
+            return EnumFriendRanks.B.getKey();
         } else {
-            return EnumNPCRank.C;
+            return EnumFriendRanks.C.getKey();
         }
     }
 
@@ -83,5 +84,4 @@ public enum EnumNPCRank {
     public Item getFeet() {
         return this.feet;
     }
-
 }

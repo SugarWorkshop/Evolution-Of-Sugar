@@ -10,7 +10,7 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import java.util.List;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelNPC extends BipedModel {
+public class ModelFriend extends BipedModel {
     public final ModelRenderer bipedLeftArmwear;
     public final ModelRenderer bipedRightArmwear;
     public final ModelRenderer bipedLeftLegwear;
@@ -19,7 +19,7 @@ public class ModelNPC extends BipedModel {
     private final boolean smallArms;
     private List<ModelRenderer> modelRenderers = Lists.newArrayList();
 
-    public ModelNPC(float modelSize, boolean smallArmsIn) {
+    public ModelFriend(float modelSize, boolean smallArmsIn) {
         super(modelSize, 0.0F, 64, 64);
         this.smallArms = smallArmsIn;
         if (smallArmsIn) {

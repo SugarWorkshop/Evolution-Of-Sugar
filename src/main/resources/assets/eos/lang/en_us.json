@@ -13,11 +13,10 @@
   "item.eos.funny_chestplate": "Funny Chestplate",
   "item.eos.funny_leggings": "Funny Leggings",
   "item.eos.funny_boots": "Funny Boots",
-  "item.eos.sugarmgp_spawn_egg": "SugarMGP Spawn Egg",
+  "item.eos.friend_spawn_egg": "Friend Spawn Egg",
   "block.eos.funny_ore": "Funny Ore",
   "block.eos.cuckoo_ore": "Cuckoo Ore",
   "block.eos.funny_block": "Funny Block",
   "block.eos.cuckoo_block": "Cuckoo Block",
-  "entity.eos.sugarmgp": "SugarMGP",
   "itemGroup.eos_group": "Evolution Of Sugar"
 }
