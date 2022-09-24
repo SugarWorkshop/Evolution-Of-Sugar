@@ -38,8 +38,8 @@ public enum EnumFriendRanks {
         return EnumFriendRanks.values()[key];
     }
 
-    public static int randomGetKey() {
-        int a = new Random().nextInt(100);
+    public static int randomGetKey(Random rand) {
+        int a = rand.nextInt(100);
         if (a < 10) {
             return EnumFriendRanks.A.getKey();
         } else if (a < 30) {
