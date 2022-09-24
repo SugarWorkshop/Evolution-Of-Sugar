@@ -22,12 +22,11 @@ public class ModEntityGeneration {
                 Biomes.SUNFLOWER_PLAINS,
                 Biomes.SNOWY_TUNDRA,
                 Biomes.FLOWER_FOREST,
-                Biomes.FOREST,
                 Biomes.BIRCH_FOREST,
                 Biomes.ICE_SPIKES,
                 Biomes.TALL_BIRCH_FOREST
         };
-        addUseWhitelist(event, EntityHandler.entitySugarMGP.get(), 8, 1, 4, biomes);
+        addUseWhitelist(event, EntityHandler.entityFriend.get(), 12, 1, 3, biomes);
     }
 
     //使用黑名单
