@@ -26,7 +26,7 @@ public class ModEntityGeneration {
                 Biomes.ICE_SPIKES,
                 Biomes.TALL_BIRCH_FOREST
         };
-        addUseWhitelist(event, EntityHandler.entityFriend.get(), 12, 1, 3, biomes);
+        addUseWhitelist(event, EntityHandler.entityFriend.get(), 12, 1, 4, biomes);
     }
 
     //使用黑名单
