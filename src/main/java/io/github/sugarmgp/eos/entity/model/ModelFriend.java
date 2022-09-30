@@ -57,6 +57,14 @@ public class ModelFriend<T extends LivingEntity> extends BipedModel<T> {
         return this.modelRenderers.get(randomIn.nextInt(this.modelRenderers.size()));
     }
 
+    public void accept(ModelRenderer modelRenderer) {
+        if (this.modelRenderers == null) {
+            this.modelRenderers = Lists.newArrayList();
+        }
+
+        this.modelRenderers.add(modelRenderer);
+    }
+
     public void setVisible(boolean visible) {
         super.setVisible(visible);
         this.bipedLeftArmwear.showModel = visible;
