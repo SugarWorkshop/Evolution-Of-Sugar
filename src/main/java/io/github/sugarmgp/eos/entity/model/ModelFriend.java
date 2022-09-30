@@ -8,9 +8,10 @@ import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 
 import java.util.List;
+import java.util.Random;
 
 @OnlyIn(Dist.CLIENT)
-public class ModelFriend extends BipedModel {
+public class ModelFriend<T extends LivingEntity> extends BipedModel<T> {
     public final ModelRenderer bipedLeftArmwear;
     public final ModelRenderer bipedRightArmwear;
     public final ModelRenderer bipedLeftLegwear;
@@ -43,13 +44,17 @@ public class ModelFriend extends BipedModel {
         this.bipedBodyWear.setRotationPoint(0.0F, 0.0F, 0.0F);
     }
 
-    public void setRotationAngles(LivingEntity entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
+    public void setRotationAngles(T entityIn, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
         super.setRotationAngles(entityIn, limbSwing, limbSwingAmount, ageInTicks, netHeadYaw, headPitch);
         this.bipedLeftLegwear.copyModelAngles(this.bipedLeftLeg);
         this.bipedRightLegwear.copyModelAngles(this.bipedRightLeg);
         this.bipedLeftArmwear.copyModelAngles(this.bipedLeftArm);
         this.bipedRightArmwear.copyModelAngles(this.bipedRightArm);
         this.bipedBodyWear.copyModelAngles(this.bipedBody);
+    }
+
+    public ModelRenderer getRandomModelRenderer(Random randomIn) {
+        return this.modelRenderers.get(randomIn.nextInt(this.modelRenderers.size()));
     }
 
     public void setVisible(boolean visible) {

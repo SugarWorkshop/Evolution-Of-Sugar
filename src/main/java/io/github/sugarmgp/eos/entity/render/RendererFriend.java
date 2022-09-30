@@ -3,10 +3,10 @@ package io.github.sugarmgp.eos.entity.render;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import io.github.sugarmgp.eos.EOS;
 import io.github.sugarmgp.eos.entity.EntityFriend;
+import io.github.sugarmgp.eos.entity.layer.LayerArrow;
 import io.github.sugarmgp.eos.entity.model.ModelFriend;
 import net.minecraft.client.renderer.entity.EntityRendererManager;
 import net.minecraft.client.renderer.entity.LivingRenderer;
-import net.minecraft.client.renderer.entity.layers.ArrowLayer;
 import net.minecraft.client.renderer.entity.layers.BipedArmorLayer;
 import net.minecraft.client.renderer.entity.layers.HeadLayer;
 import net.minecraft.client.renderer.entity.layers.HeldItemLayer;
@@ -23,7 +23,7 @@ public class RendererFriend extends LivingRenderer {
         super(managerIn, new ModelFriend(0.0F), 0.5F);
         this.addLayer(new BipedArmorLayer<>(this, new BipedModel(0.5F), new BipedModel(1.0F)));
         this.addLayer(new HeldItemLayer<>(this));
-        this.addLayer(new ArrowLayer<>(this));
+        this.addLayer(new LayerArrow(this));
         this.addLayer(new HeadLayer<>(this));
     }
 
