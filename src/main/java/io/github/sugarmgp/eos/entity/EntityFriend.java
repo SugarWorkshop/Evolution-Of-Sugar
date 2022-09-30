@@ -148,6 +148,17 @@ public class EntityFriend extends TameableEntity {
         super.livingTick();
     }
 
+    @Override
+    public void notifyDataManagerChange(DataParameter<?> key) {
+        if (RANK.equals(key)) {
+            this.setRank(this.dataManager.get(RANK));
+        }
+        if (MEMBER.equals(key)) {
+            this.setMember(this.dataManager.get(MEMBER));
+        }
+        super.notifyDataManagerChange(key);
+    }
+
     protected void setItem(Item handIn, Item feetIn) {
         ItemStack hand = new ItemStack(handIn);
         ItemStack feet = new ItemStack(feetIn);
@@ -176,7 +187,6 @@ public class EntityFriend extends TameableEntity {
     }
 
     protected void setRank(int rankIn) {
-        this.dataManager.set(RANK, rankIn);
         EnumFriendRanks rank = EnumFriendRanks.getByKey(rankIn);
         this.experienceValue = rank.getExperienceValue();
         this.setItem(rank.getHand(), rank.getFeet());
@@ -190,7 +200,6 @@ public class EntityFriend extends TameableEntity {
     }
 
     protected void setMember(int memberIn) {
-        this.dataManager.set(MEMBER, memberIn);
         this.setCustomName(ITextComponent.getTextComponentOrEmpty(EnumFriendMembers.getByKey(memberIn).name()));
     }
 
@@ -228,8 +237,8 @@ public class EntityFriend extends TameableEntity {
         }
         int rank = EnumFriendRanks.randomGetKey(this.rand);
         int member = EnumFriendMembers.randomGetKey(this.rand);
-        this.setRank(rank);
-        this.setMember(member);
+        this.dataManager.set(RANK, rank);
+        this.dataManager.set(MEMBER, member);
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
