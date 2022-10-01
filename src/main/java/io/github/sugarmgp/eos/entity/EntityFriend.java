@@ -37,7 +37,6 @@ import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class EntityFriend extends TameableEntity {
     private static final DataParameter<Integer> RANK = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
@@ -116,7 +115,7 @@ public class EntityFriend extends TameableEntity {
         }
     }
 
-    public boolean shouldAttackEntity(LivingEntity target, LivingEntity owner) { //从WolfEntity修改来的
+    public boolean shouldAttackEntity(LivingEntity target, LivingEntity owner) { //修改自WolfEntity
         if (!(target instanceof CreeperEntity) && !(target instanceof GhastEntity)) {
             if (target instanceof EntityFriend) {
                 EntityFriend entity = (EntityFriend) target;
@@ -151,10 +150,10 @@ public class EntityFriend extends TameableEntity {
     @Override
     public void notifyDataManagerChange(DataParameter<?> key) {
         if (RANK.equals(key)) {
-            this.setRank(this.dataManager.get(RANK));
+            this.applyRank();
         }
         if (MEMBER.equals(key)) {
-            this.setMember(this.dataManager.get(MEMBER));
+            this.applyMember();
         }
         super.notifyDataManagerChange(key);
     }
@@ -162,32 +161,33 @@ public class EntityFriend extends TameableEntity {
     protected void setItem(Item handIn, Item feetIn) {
         ItemStack hand = new ItemStack(handIn);
         ItemStack feet = new ItemStack(feetIn);
-        hand.addEnchantment(Enchantments.UNBREAKING, 50);
-        feet.addEnchantment(Enchantments.UNBREAKING, 50);
+        hand.getTag().putBoolean("Unbreakable", true);
+        feet.getTag().putBoolean("Unbreakable", true);
+        hand.addEnchantment(Enchantments.UNBREAKING, 100);
+        feet.addEnchantment(Enchantments.UNBREAKING, 100);
         this.setItemStackToSlot(EquipmentSlotType.MAINHAND, hand);
         this.setItemStackToSlot(EquipmentSlotType.FEET, feet);
     }
 
     @Override
     protected void spawnDrops(DamageSource damageSourceIn) {
-        ItemStack hand = new ItemStack(this.getRank().getHand());
-        ItemStack feet = new ItemStack(this.getRank().getFeet());
-        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, hand); //在掉落时替换成无附魔的物品
-        this.setItemStackToSlot(EquipmentSlotType.FEET, feet);
+        //在掉落时替换成无附魔的物品
+        this.setItemStackToSlot(EquipmentSlotType.MAINHAND, new ItemStack(this.getRank().getHand()));
+        this.setItemStackToSlot(EquipmentSlotType.FEET, new ItemStack(this.getRank().getFeet()));
         super.spawnDrops(damageSourceIn);
     }
 
     @Override
     protected int getExperiencePoints(PlayerEntity player) {
-        return this.experienceValue + (int) (new Random().nextInt(10) / 9.0 * 5);
+        return this.experienceValue + (int) (this.rand.nextInt(10) / 9.0 * 5);
     }
 
     public EnumFriendRanks getRank() {
         return EnumFriendRanks.getByKey(this.dataManager.get(RANK));
     }
 
-    protected void setRank(int rankIn) {
-        EnumFriendRanks rank = EnumFriendRanks.getByKey(rankIn);
+    protected void applyRank() {
+        EnumFriendRanks rank = this.getRank();
         this.experienceValue = rank.getExperienceValue();
         this.setItem(rank.getHand(), rank.getFeet());
         this.getAttribute(Attributes.MAX_HEALTH).setBaseValue(rank.getMaxHealth());
@@ -199,8 +199,9 @@ public class EntityFriend extends TameableEntity {
         return EnumFriendMembers.getByKey(this.dataManager.get(MEMBER));
     }
 
-    protected void setMember(int memberIn) {
-        this.setCustomName(ITextComponent.getTextComponentOrEmpty(EnumFriendMembers.getByKey(memberIn).name()));
+    protected void applyMember() {
+        EnumFriendMembers member = this.getMember();
+        this.setCustomName(ITextComponent.getTextComponentOrEmpty(member.name()));
     }
 
     @Override
@@ -211,7 +212,7 @@ public class EntityFriend extends TameableEntity {
     @Override
     protected void registerData() {
         super.registerData();
-        this.dataManager.register(RANK, 2);
+        this.dataManager.register(RANK, 0);
         this.dataManager.register(MEMBER, 0);
     }
 
@@ -235,10 +236,8 @@ public class EntityFriend extends TameableEntity {
         if (spawnDataIn == null) {
             spawnDataIn = new AgeableEntity.AgeableData(false);
         }
-        int rank = EnumFriendRanks.randomGetKey(this.rand);
-        int member = EnumFriendMembers.randomGetKey(this.rand);
-        this.dataManager.set(RANK, rank);
-        this.dataManager.set(MEMBER, member);
+        this.dataManager.set(RANK, EnumFriendRanks.randomGetKey(this.rand));
+        this.dataManager.set(MEMBER, EnumFriendMembers.randomGetKey(this.rand));
         return super.onInitialSpawn(worldIn, difficultyIn, reason, spawnDataIn, dataTag);
     }
 
