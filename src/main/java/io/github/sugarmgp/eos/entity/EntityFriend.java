@@ -11,7 +11,7 @@ import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.ai.goal.*;
 import net.minecraft.entity.monster.CreeperEntity;
 import net.minecraft.entity.monster.GhastEntity;
-import net.minecraft.entity.monster.IMob;
+import net.minecraft.entity.monster.MonsterEntity;
 import net.minecraft.entity.passive.TameableEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.inventory.EquipmentSlotType;
@@ -26,21 +26,25 @@ import net.minecraft.particles.BasicParticleType;
 import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
-import net.minecraft.util.ActionResultType;
-import net.minecraft.util.DamageSource;
-import net.minecraft.util.Hand;
+import net.minecraft.util.*;
 import net.minecraft.util.text.ITextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.network.NetworkHooks;
 
 import javax.annotation.Nullable;
+import java.util.UUID;
 
-public class EntityFriend extends TameableEntity {
+public class EntityFriend extends TameableEntity implements IAngerable {
     private static final DataParameter<Integer> RANK = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
     private static final DataParameter<Integer> MEMBER = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
+    private static final DataParameter<Integer> ANGER_TIME = EntityDataManager.createKey(EntityFriend.class, DataSerializers.VARINT);
+    private static final RangedInteger RANGED_TICK = TickRangeConverter.convertRange(20, 39);
+    private UUID angerTarget;
 
     public EntityFriend(EntityType<? extends TameableEntity> typeIn, World worldIn) {
         super(typeIn, worldIn);
@@ -66,7 +70,7 @@ public class EntityFriend extends TameableEntity {
         this.targetSelector.addGoal(3, (new HurtByTargetGoal(this)).setCallsForHelp());
         this.targetSelector.addGoal(4, new NearestAttackableTargetGoal(this, LivingEntity.class, 7, true, false, new Predicate<LivingEntity>() {
             public boolean apply(@Nullable LivingEntity entity) {
-                return entity instanceof IMob && !entity.isInvisible(); //选择怪物进行攻击
+                return entity instanceof MonsterEntity && !(entity instanceof CreeperEntity) && !entity.isInvisible(); //选择怪物进行攻击
             }
         }));
         this.targetSelector.addGoal(5, new ResetAngerGoal(this, true));
@@ -79,29 +83,38 @@ public class EntityFriend extends TameableEntity {
         if (item.equals(ItemHandler.itemFunnyApple.get())) {
             if (this.isTamed()) {
                 if (this.getHealth() < this.getMaxHealth()) {
+                    if (this.world.isRemote) {
+                        this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 4);
+                        return ActionResultType.SUCCESS;
+                    }
                     if (!player.isCreative()) {
                         itemStack.shrink(1);
                     }
                     int heal = item.getFood().getHealing();
                     this.heal(heal);
-                    this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 4);
+                    return ActionResultType.SUCCESS;
                 }
-            } else {
+            } else if (!this.func_233678_J__()) {
+                if (this.world.isRemote) {
+                    this.playEffect(ParticleTypes.HAPPY_VILLAGER, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 8);
+                    return ActionResultType.SUCCESS;
+                }
                 if (!player.isCreative()) {
                     itemStack.shrink(1);
                 }
                 if (!net.minecraftforge.event.ForgeEventFactory.onAnimalTame(this, player)) {
                     this.setTamedBy(player);
+                    this.navigator.clearPath();
                     this.setAttackTarget(null);
-                    this.playEffect(ParticleTypes.HAPPY_VILLAGER, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 8);
                 }
+                return ActionResultType.SUCCESS;
             }
         }
         return super.func_230254_b_(player, hand);
     }
 
+    @OnlyIn(Dist.CLIENT)
     protected void playEffect(BasicParticleType particleTypes, Double posX, Double posY, Double posZ, int times) {
-        if (!world.isRemote()) return;
         for (int i = 1; i <= times; ++i) {
             double d0 = this.rand.nextGaussian() * 0.015; //白糖自研随机算法
             double d1 = this.rand.nextGaussian() * 0.015;
@@ -132,10 +145,12 @@ public class EntityFriend extends TameableEntity {
 
     @Override
     public void livingTick() {
+        super.livingTick();
+
         this.updateArmSwingProgress();
 
         BasicParticleType particleType = this.getRank().getParticleType();
-        if (particleType != null && (this.getMotion().x != 0.0D || this.getMotion().z != 0.0D)) { //在移动时播放粒子效果
+        if (this.world.isRemote && particleType != null && (this.getMotion().x != 0.0D || this.getMotion().z != 0.0D)) { //在移动时播放粒子效果
             this.playEffect(particleType, this.getPosX(), this.getPosY() - 0.45, this.getPosZ(), 1);
         }
 
@@ -144,7 +159,9 @@ public class EntityFriend extends TameableEntity {
             this.addPotionEffect(new EffectInstance(Effects.REGENERATION, 72000, regenerationLevel, false, false));
         }
 
-        super.livingTick();
+        if (!this.world.isRemote) {
+            this.func_241359_a_((ServerWorld) this.world, true);
+        }
     }
 
     @Override
@@ -214,6 +231,7 @@ public class EntityFriend extends TameableEntity {
         super.registerData();
         this.dataManager.register(RANK, 0);
         this.dataManager.register(MEMBER, 0);
+        this.dataManager.register(ANGER_TIME, 0);
     }
 
     @Override
@@ -221,6 +239,9 @@ public class EntityFriend extends TameableEntity {
         super.readAdditional(compound);
         this.dataManager.set(RANK, compound.getInt("Rank"));
         this.dataManager.set(MEMBER, compound.getInt("Member"));
+        if (!this.world.isRemote) {
+            this.readAngerNBT((ServerWorld) this.world, compound);
+        }
     }
 
     @Override
@@ -228,6 +249,28 @@ public class EntityFriend extends TameableEntity {
         super.writeAdditional(compound);
         compound.putInt("Rank", this.dataManager.get(RANK));
         compound.putInt("Member", this.dataManager.get(MEMBER));
+        this.writeAngerNBT(compound);
+    }
+
+    public int getAngerTime() {
+        return this.dataManager.get(ANGER_TIME);
+    }
+
+    public void setAngerTime(int time) {
+        this.dataManager.set(ANGER_TIME, time);
+    }
+
+    public void func_230258_H__() {
+        this.setAngerTime(RANGED_TICK.getRandomWithinRange(this.rand));
+    }
+
+    @Nullable
+    public UUID getAngerTarget() {
+        return this.angerTarget;
+    }
+
+    public void setAngerTarget(@Nullable UUID target) {
+        this.angerTarget = target;
     }
 
     @Override
