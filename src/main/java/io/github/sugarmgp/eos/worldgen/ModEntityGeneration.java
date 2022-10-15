@@ -26,19 +26,11 @@ public class ModEntityGeneration {
                 Biomes.ICE_SPIKES,
                 Biomes.TALL_BIRCH_FOREST
         };
-        addUseWhitelist(event, EntityHandler.entityFriend.get(), 12, 1, 4, biomes);
+        addWithList(event, EntityHandler.entityFriend.get(), 12, 1, 4, biomes);
     }
 
-    //使用黑名单
-    private static void addUseBlacklist(BiomeLoadingEvent event, EntityType<?> type, int weight, int minCount, int maxCount, RegistryKey<Biome>... biomes) {
-        if (!Arrays.stream(biomes).map(RegistryKey::getLocation).map(Object::toString).anyMatch(s -> s.equals(event.getName().toString()))) {
-            addEntityToBiome(event, type, weight, minCount, maxCount);
-        }
-    }
-
-    //使用白名单
     @SafeVarargs
-    private static void addUseWhitelist(BiomeLoadingEvent event, EntityType<?> type, int weight, int minCount, int maxCount, RegistryKey<Biome>... biomes) {
+    private static void addWithList(BiomeLoadingEvent event, EntityType<?> type, int weight, int minCount, int maxCount, RegistryKey<Biome>... biomes) {
         if (Arrays.stream(biomes).map(RegistryKey::getLocation).map(Object::toString).anyMatch(s -> s.equals(event.getName().toString()))) {
             addEntityToBiome(event, type, weight, minCount, maxCount);
         }
