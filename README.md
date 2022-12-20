@@ -20,8 +20,7 @@
 
 # 开发状态
 
-EOS 目前由 **Sugar Workshop** 维护，目前处于非常早期的版本；
-EOS 目前还没有发布公开的正式版本。如果你对这个模组有意见或建议，你可以直接联系我们或者[提出 Issue](https://github.com/SugarWorkshop/Evolution-Of-Sugar/issues)。
+EOS 目前由 **Sugar Workshop** 维护，目前处于非常早期的版本。如果你对这个模组有意见或建议，你可以直接联系我们或者[提出 Issue](https://github.com/SugarWorkshop/Evolution-Of-Sugar/issues)。
 
 # 模组基本信息
 
