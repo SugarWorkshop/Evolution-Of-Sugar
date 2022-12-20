@@ -56,5 +56,5 @@ gradlew build
 
 # 特别鸣谢
 
-1. 成绩优越、品德高尚、乐于助人、和蔼可亲、人见人爱の [@KitraMGP](https://github.com/zi-jing)
+1. 成绩优越、品德高尚、乐于助人、和蔼可亲、人见人爱の吉祥物 [@KitraMGP](https://github.com/zi-jing)
 2. 此 Mod 名字的由来 [Evolution-Of-Knowledge](https://github.com/gonggongjohn/Evolution-Of-Knowledge)
