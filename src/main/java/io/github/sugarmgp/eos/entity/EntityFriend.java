@@ -252,23 +252,28 @@ public class EntityFriend extends TameableEntity implements IAngerable {
         this.writeAngerNBT(compound);
     }
 
+    @Override
     public int getAngerTime() {
         return this.dataManager.get(ANGER_TIME);
     }
 
+    @Override
     public void setAngerTime(int time) {
         this.dataManager.set(ANGER_TIME, time);
     }
 
+    @Override
     public void func_230258_H__() {
         this.setAngerTime(RANGED_TICK.getRandomWithinRange(this.rand));
     }
 
+    @Override
     @Nullable
     public UUID getAngerTarget() {
         return this.angerTarget;
     }
 
+    @Override
     public void setAngerTarget(@Nullable UUID target) {
         this.angerTarget = target;
     }
