@@ -100,7 +100,7 @@ jar {
         attributes([
                 "Specification-Title"     : project.name,
                 "Specification-Vendor"    : "eos",
-                "Specification-Version"   : "1",
+                "Specification-Version"   : "${version}",
                 "Implementation-Title"    : project.name,
                 "Implementation-Version"  : "${version}",
                 "Implementation-Vendor"   : "eos",
