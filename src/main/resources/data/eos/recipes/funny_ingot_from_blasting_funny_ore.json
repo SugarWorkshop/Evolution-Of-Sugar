@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.85,
+  "ingredient": {
+    "item": "eos:funny_ore"
+  },
+  "result": "eos:funny_ingot"
+}

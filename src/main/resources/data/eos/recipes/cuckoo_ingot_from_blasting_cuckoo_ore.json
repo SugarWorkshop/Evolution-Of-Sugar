@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:blasting",
+  "cookingtime": 100,
+  "experience": 0.85,
+  "ingredient": {
+    "item": "eos:cuckoo_ore"
+  },
+  "result": "eos:cuckoo_ingot"
+}

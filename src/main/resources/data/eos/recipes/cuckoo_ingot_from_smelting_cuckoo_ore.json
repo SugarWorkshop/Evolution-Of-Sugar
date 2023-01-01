@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "cookingtime": 200,
+  "experience": 0.85,
+  "ingredient": {
+    "item": "eos:cuckoo_ore"
+  },
+  "result": "eos:cuckoo_ingot"
+}
