@@ -9,7 +9,6 @@ import net.minecraft.particles.ParticleTypes;
 import java.util.Random;
 
 public enum EnumFriendRanks {
-
     A(25, 28.0D, 2.0D, 0.8D, ParticleTypes.FLAME, 1, Items.NETHERITE_SWORD, Items.NETHERITE_BOOTS),
     B(20, 24.0D, 1.5D, 0.75D, ParticleTypes.INSTANT_EFFECT, 0, ItemHandler.itemCuckooSword.get(), ItemHandler.itemFunnyBoots.get()),
     C(15, 20.0D, 1.0D, 0.7D, null, -1, Items.STONE_SWORD, Items.CHAINMAIL_BOOTS);

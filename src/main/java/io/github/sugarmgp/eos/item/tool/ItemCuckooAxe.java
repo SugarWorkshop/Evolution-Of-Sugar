@@ -4,7 +4,7 @@ import io.github.sugarmgp.eos.EOS;
 import io.github.sugarmgp.eos.util.ModItemTier;
 import net.minecraft.item.AxeItem;
 
-public class ItemCuckooAxe extends AxeItem implements ICuckooTool {
+public class ItemCuckooAxe extends AxeItem {
     public ItemCuckooAxe() {
         super(
                 ModItemTier.CUCKOO,

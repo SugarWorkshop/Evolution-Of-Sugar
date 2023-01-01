@@ -6,7 +6,6 @@ import net.minecraft.item.Item;
 import net.minecraft.item.crafting.Ingredient;
 
 public enum ModItemTier implements IItemTier {
-
     CUCKOO(3, 150, 10.0F, 2.5F, 16, ItemHandler.itemCuckooIngot.get());
 
     private final int harvestLevel;

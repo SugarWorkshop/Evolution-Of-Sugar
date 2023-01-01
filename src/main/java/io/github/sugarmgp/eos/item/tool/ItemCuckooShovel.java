@@ -4,7 +4,7 @@ import io.github.sugarmgp.eos.EOS;
 import io.github.sugarmgp.eos.util.ModItemTier;
 import net.minecraft.item.ShovelItem;
 
-public class ItemCuckooShovel extends ShovelItem implements ICuckooTool {
+public class ItemCuckooShovel extends ShovelItem {
     public ItemCuckooShovel() {
         super(
                 ModItemTier.CUCKOO,

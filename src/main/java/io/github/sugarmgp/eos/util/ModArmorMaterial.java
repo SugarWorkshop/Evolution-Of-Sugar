@@ -12,7 +12,6 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.fml.RegistryObject;
 
 public enum ModArmorMaterial implements IArmorMaterial {
-
     FUNNY("funny", 24, new int[]{2, 5, 7, 2}, 17, SoundEvents.ITEM_ARMOR_EQUIP_GOLD, 1.0F, 0.0F, ItemHandler.itemFunnyIngot);
 
     private static final int[] MAX_DAMAGE_ARRAY = new int[]{13, 15, 16, 11};

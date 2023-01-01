@@ -3,7 +3,6 @@ package io.github.sugarmgp.eos.util;
 import java.util.Random;
 
 public enum EnumFriendMembers {
-
     SugarMGP, KitraMGP, chihuoQwQ, jujixiguan, SEALchanPS, Tank1014, Wubaozi123, xtexChooser;
 
     public static EnumFriendMembers getByKey(int key) {
