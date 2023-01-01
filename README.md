@@ -23,12 +23,12 @@ EOS 目前由 **Sugar Workshop** 维护，目前处于非常早期的版本。�
 ## 模组基本信息
 
 - Minecraft 版本: 1.16.5
-- Forge 版本: 36.2.34
+- Forge 版本: 36.2.39
 - Mod 版本: [![Latest](https://img.shields.io/github/v/release/SugarWorkshop/Evolution-Of-Sugar?include_prereleases)](https://github.com/SugarWorkshop/Evolution-Of-Sugar/releases)
 
 ## 如何游玩
 
-1. 确保您已经安装 **Minecraft 1.16.5** 和 **Forge 36.2.34**
+1. 确保您已经安装 **Minecraft 1.16.5** 和 **Forge**
 2. 前往 [Release 页面](https://github.com/SugarWorkshop/Evolution-Of-Sugar/releases)
 3. 选择你想游玩的版本
 4. 下载 **Assets** 中的 `EOS-Build.tar` 并解压
