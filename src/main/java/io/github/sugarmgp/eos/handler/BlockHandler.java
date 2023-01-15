@@ -13,8 +13,8 @@ import net.minecraftforge.registries.ForgeRegistries;
 public class BlockHandler {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, EOS.MODID);
 
-    public static RegistryObject<Block> blockFunnyOre = BLOCKS.register("funny_ore", BlockFunnyOre::new);
-    public static RegistryObject<Block> blockCuckooOre = BLOCKS.register("cuckoo_ore", BlockCuckooOre::new);
-    public static RegistryObject<Block> blockFunnyBlock = BLOCKS.register("funny_block", BlockFunnyBlock::new);
-    public static RegistryObject<Block> blockCuckooBlock = BLOCKS.register("cuckoo_block", BlockCuckooBlock::new);
+    public static final RegistryObject<Block> blockFunnyOre = BLOCKS.register("funny_ore", BlockFunnyOre::new);
+    public static final RegistryObject<Block> blockCuckooOre = BLOCKS.register("cuckoo_ore", BlockCuckooOre::new);
+    public static final RegistryObject<Block> blockFunnyBlock = BLOCKS.register("funny_block", BlockFunnyBlock::new);
+    public static final RegistryObject<Block> blockCuckooBlock = BLOCKS.register("cuckoo_block", BlockCuckooBlock::new);
 }

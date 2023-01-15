@@ -37,16 +37,16 @@ public class ItemHandler {
 
     public static final RegistryObject<SpawnEggItem> itemFriendSpawnEgg = ITEMS.register("friend_spawn_egg", () -> new ForgeSpawnEggItem(EntityHandler.entityFriend, 0xB3FFFF, 0x4D94FF, new Item.Properties().group(EOS.ITEMGROUP)));
 
-    public static RegistryObject<Item> itemFunnyOre = ITEMS.register("funny_ore", () -> {
+    public static final RegistryObject<Item> itemFunnyOre = ITEMS.register("funny_ore", () -> {
         return new BlockItem(BlockHandler.blockFunnyOre.get(), new Item.Properties().group(EOS.ITEMGROUP));
     });
-    public static RegistryObject<Item> itemCuckooOre = ITEMS.register("cuckoo_ore", () -> {
+    public static final RegistryObject<Item> itemCuckooOre = ITEMS.register("cuckoo_ore", () -> {
         return new BlockItem(BlockHandler.blockCuckooOre.get(), new Item.Properties().group(EOS.ITEMGROUP));
     });
-    public static RegistryObject<Item> itemFunnyBlock = ITEMS.register("funny_block", () -> {
+    public static final RegistryObject<Item> itemFunnyBlock = ITEMS.register("funny_block", () -> {
         return new BlockItem(BlockHandler.blockFunnyBlock.get(), new Item.Properties().group(EOS.ITEMGROUP));
     });
-    public static RegistryObject<Item> itemCuckooBlock = ITEMS.register("cuckoo_block", () -> {
+    public static final RegistryObject<Item> itemCuckooBlock = ITEMS.register("cuckoo_block", () -> {
         return new BlockItem(BlockHandler.blockCuckooBlock.get(), new Item.Properties().group(EOS.ITEMGROUP));
     });
 }
