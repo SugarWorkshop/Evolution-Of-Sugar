@@ -11,7 +11,8 @@ public enum EnumFriendMembers {
     Tank1014,
     Wubaozi123,
     xtexChooser,
-    CalciumSilicate(true);
+    CalciumSilicate(true),
+    Ping_yuGTS;
 
     private final boolean slim;
 
