@@ -4,6 +4,7 @@ import io.github.sugarmgp.eos.EOS;
 import io.github.sugarmgp.eos.item.ItemCuckooIngot;
 import io.github.sugarmgp.eos.item.ItemFunnyApple;
 import io.github.sugarmgp.eos.item.ItemFunnyIngot;
+import io.github.sugarmgp.eos.item.ItemTorcherino;
 import io.github.sugarmgp.eos.item.armor.ItemFunnyBoots;
 import io.github.sugarmgp.eos.item.armor.ItemFunnyChestplate;
 import io.github.sugarmgp.eos.item.armor.ItemFunnyHelmet;
@@ -23,6 +24,7 @@ public class ItemHandler {
     public static final RegistryObject<Item> itemCuckooIngot = ITEMS.register("cuckoo_ingot", ItemCuckooIngot::new);
     public static final RegistryObject<Item> itemFunnyApple = ITEMS.register("funny_apple", ItemFunnyApple::new);
     public static final RegistryObject<Item> itemFunnyIngot = ITEMS.register("funny_ingot", ItemFunnyIngot::new);
+    public static final RegistryObject<Item> itemTorcherino = ITEMS.register("torcherino", ItemTorcherino::new);
 
     public static final RegistryObject<Item> itemCuckooAxe = ITEMS.register("cuckoo_axe", ItemCuckooAxe::new);
     public static final RegistryObject<Item> itemCuckooHoe = ITEMS.register("cuckoo_hoe", ItemCuckooHoe::new);

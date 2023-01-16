@@ -14,9 +14,13 @@
   "item.eos.funny_leggings": "Funny Leggings",
   "item.eos.funny_boots": "Funny Boots",
   "item.eos.friend_spawn_egg": "Friend Spawn Egg",
+  "item.eos.torcherino": "Torcherino",
   "block.eos.funny_ore": "Funny Ore",
   "block.eos.cuckoo_ore": "Cuckoo Ore",
   "block.eos.funny_block": "Funny Block",
   "block.eos.cuckoo_block": "Cuckoo Block",
-  "itemGroup.eos_group": "Evolution Of Sugar"
+  "itemGroup.eos_group": "Evolution Of Sugar",
+  "tooltip.eos.torcherino": "§cPlease take the risks it brings by yourself",
+  "message.torcherino.use": "§cYou have ENRAGED the FOREST BAT!!!",
+  "message.torcherino.use2": "§cYou'll get the punishment you deserve."
 }

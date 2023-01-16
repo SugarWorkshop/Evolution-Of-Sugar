@@ -14,9 +14,13 @@
   "item.eos.funny_leggings": "滑稽护腿",
   "item.eos.funny_boots": "滑稽靴子",
   "item.eos.friend_spawn_egg": "伙伴刷怪蛋",
+  "item.eos.torcherino": "加速火把",
   "block.eos.funny_ore": "滑稽矿石",
   "block.eos.cuckoo_ore": "咕咕矿石",
   "block.eos.funny_block": "滑稽块",
   "block.eos.cuckoo_block": "咕咕块",
-  "itemGroup.eos_group": "Evolution Of Sugar"
+  "itemGroup.eos_group": "Evolution Of Sugar",
+  "tooltip.eos.torcherino": "§c请自己承担它带来的风险",
+  "message.torcherino.use": "§c你激怒了森林蝙蝠！！！",
+  "message.torcherino.use2": "§c你将得到你应有的惩罚。"
 }
