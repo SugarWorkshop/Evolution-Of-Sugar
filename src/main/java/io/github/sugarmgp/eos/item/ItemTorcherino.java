@@ -1,6 +1,7 @@
 package io.github.sugarmgp.eos.item;
 
 import io.github.sugarmgp.eos.EOS;
+import io.github.sugarmgp.eos.handler.ConfigHandler;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
@@ -28,14 +29,12 @@ public class ItemTorcherino extends Item {
             playerIn.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
             playerIn.sendStatusMessage(ITextComponent.getTextComponentOrEmpty(I18n.format("message.torcherino.use")), false);
             playerIn.sendStatusMessage(ITextComponent.getTextComponentOrEmpty(I18n.format("message.torcherino.use2")), false);
-
-//            if (ConfigHandler.torcherinoExploding == false) {
-//                playerIn.attackEntityFrom(DamageSource.GENERIC, 1000);
-//                return super.onItemRightClick(worldIn, playerIn, handIn);
-//            }
-
-            //手上的火把越多，爆炸威力越强
-            playerIn.attackEntityFrom(DamageSource.causeExplosionDamage(worldIn.createExplosion(playerIn, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), 2 * count, Explosion.Mode.BREAK)), 40 * count);
+            if (!ConfigHandler.torcherinoExploding.get()) {
+                playerIn.attackEntityFrom(DamageSource.GENERIC, 40 * count);
+            } else {
+                //手上的火把越多，爆炸威力越强
+                playerIn.attackEntityFrom(DamageSource.causeExplosionDamage(worldIn.createExplosion(playerIn, playerIn.getPosX(), playerIn.getPosY(), playerIn.getPosZ(), 2 * count + 6, Explosion.Mode.BREAK)), 40 * count);
+            }
         }
         return super.onItemRightClick(worldIn, playerIn, handIn);
     }

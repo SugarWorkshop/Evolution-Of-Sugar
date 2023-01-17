@@ -5,7 +5,6 @@ import net.minecraft.item.ItemGroup;
 import net.minecraft.item.ItemStack;
 
 public class EOSItemGroup extends ItemGroup {
-
     public EOSItemGroup() {
         super("eos_group");
     }
