@@ -27,7 +27,7 @@ import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
-import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.StringTextComponent;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
@@ -84,7 +84,7 @@ public class EntityFriend extends TameableEntity implements IAngerable {
             if (this.isTamed()) {
                 if (this.getHealth() < this.getMaxHealth()) {
                     if (this.world.isRemote) {
-                        this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 4);
+                        this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.375, this.getPosZ(), 4);
                         return ActionResultType.SUCCESS;
                     }
                     if (!player.isCreative()) {
@@ -96,7 +96,7 @@ public class EntityFriend extends TameableEntity implements IAngerable {
                 }
             } else if (!this.func_233678_J__()) {
                 if (this.world.isRemote) {
-                    this.playEffect(ParticleTypes.HAPPY_VILLAGER, this.getPosX(), this.getPosY() + 0.425, this.getPosZ(), 8);
+                    this.playEffect(ParticleTypes.HAPPY_VILLAGER, this.getPosX(), this.getPosY() + 0.415, this.getPosZ(), 8);
                     return ActionResultType.SUCCESS;
                 }
                 if (!player.isCreative()) {
@@ -218,7 +218,7 @@ public class EntityFriend extends TameableEntity implements IAngerable {
 
     protected void applyMember() {
         EnumFriendMembers member = this.getMember();
-        this.setCustomName(ITextComponent.getTextComponentOrEmpty(member.name()));
+        this.setCustomName(new StringTextComponent(member.name()));
     }
 
     @Override

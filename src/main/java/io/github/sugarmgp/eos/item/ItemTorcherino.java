@@ -2,7 +2,6 @@ package io.github.sugarmgp.eos.item;
 
 import io.github.sugarmgp.eos.EOS;
 import io.github.sugarmgp.eos.handler.ConfigHandler;
-import net.minecraft.client.resources.I18n;
 import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
@@ -11,6 +10,7 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.DamageSource;
 import net.minecraft.util.Hand;
 import net.minecraft.util.text.ITextComponent;
+import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraft.world.Explosion;
 import net.minecraft.world.World;
 
@@ -27,8 +27,8 @@ public class ItemTorcherino extends Item {
         if (!worldIn.isRemote) {
             int count = playerIn.getHeldItemMainhand().getCount();
             playerIn.setHeldItem(Hand.MAIN_HAND, ItemStack.EMPTY);
-            playerIn.sendStatusMessage(ITextComponent.getTextComponentOrEmpty(I18n.format("message.torcherino.use")), false);
-            playerIn.sendStatusMessage(ITextComponent.getTextComponentOrEmpty(I18n.format("message.torcherino.use2")), false);
+            playerIn.sendStatusMessage(new TranslationTextComponent("message.torcherino.use"), false);
+            playerIn.sendStatusMessage(new TranslationTextComponent("message.torcherino.use2"), false);
             if (!ConfigHandler.torcherinoExploding.get()) {
                 playerIn.attackEntityFrom(DamageSource.GENERIC, 40 * count);
             } else {
@@ -41,7 +41,7 @@ public class ItemTorcherino extends Item {
 
     @Override
     public void addInformation(ItemStack stack, World worldIn, List<ITextComponent> tooltip, ITooltipFlag flagIn) {
-        tooltip.add(ITextComponent.getTextComponentOrEmpty(I18n.format("tooltip.eos.torcherino")));
+        tooltip.add(new TranslationTextComponent("tooltip.eos.torcherino"));
         super.addInformation(stack, worldIn, tooltip, flagIn);
     }
 }
