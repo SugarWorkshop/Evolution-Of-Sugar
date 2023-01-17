@@ -23,10 +23,11 @@ public class ModEntityGeneration {
                 Biomes.SNOWY_TUNDRA,
                 Biomes.FLOWER_FOREST,
                 Biomes.BIRCH_FOREST,
-                Biomes.ICE_SPIKES,
-                Biomes.TALL_BIRCH_FOREST
+                Biomes.TALL_BIRCH_FOREST,
+                Biomes.FOREST,
+                Biomes.ICE_SPIKES
         };
-        addWithList(event, EntityHandler.entityFriend.get(), 12, 1, 4, biomes);
+        addWithList(event, EntityHandler.entityFriend.get(), 14, 1, 4, biomes);
     }
 
     @SafeVarargs
