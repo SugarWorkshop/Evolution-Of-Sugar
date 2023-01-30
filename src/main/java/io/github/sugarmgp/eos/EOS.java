@@ -39,7 +39,7 @@ public class EOS {
     public void onSetup(FMLCommonSetupEvent event) {
         if (ModList.get().isLoaded("torcherino") || ModList.get().isLoaded("projecte")) {
             CrashReport report = CrashReport.makeCrashReport(new IllegalAccessError(),
-                    "You have ENRAGED the FOREST BAT because some mods are loaded");
+                    "The FOREST BAT is ANGRY because some mods are loaded");
             throw new ReportedException(report);
         }
     }
