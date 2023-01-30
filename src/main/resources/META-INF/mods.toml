@@ -4,7 +4,7 @@ license = "GNU General Public License v3.0"
 
 [[mods]]
 modId = "eos"
-version = "${version}"
+version = "${file.jarVersion}"
 displayName = "Evolution Of Sugar"
 displayURL = "https://github.com/SugarWorkshop/Evolution-Of-Sugar/"
 authors = "SugarMGP"

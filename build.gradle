@@ -100,9 +100,9 @@ jar {
         attributes([
                 "Specification-Title"     : project.name,
                 "Specification-Vendor"    : "eos",
-                "Specification-Version"   : "${version}",
+                "Specification-Version"   : "${project.version}",
                 "Implementation-Title"    : project.name,
-                "Implementation-Version"  : "${version}",
+                "Implementation-Version"  : "${project.version}",
                 "Implementation-Vendor"   : "eos",
                 "Implementation-Timestamp": new Date().format("yyyy-MM-dd'T'HH:mm:ssZ")
         ])
