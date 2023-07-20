@@ -82,17 +82,19 @@ public class EntityFriend extends TameableEntity implements IAngerable {
         Item item = itemStack.getItem();
         if (item.equals(ItemHandler.itemFunnyApple.get())) {
             if (this.isTamed()) {
-                if (this.getHealth() < this.getMaxHealth()) {
-                    if (this.world.isRemote) {
-                        this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.375, this.getPosZ(), 4);
+                if (this.getOwner().equals(player)) {
+                    if (this.getHealth() < this.getMaxHealth()) {
+                        if (this.world.isRemote) {
+                            this.playEffect(ParticleTypes.HEART, this.getPosX(), this.getPosY() + 0.375, this.getPosZ(), 4);
+                            return ActionResultType.SUCCESS;
+                        }
+                        if (!player.isCreative()) {
+                            itemStack.shrink(1);
+                        }
+                        int heal = item.getFood().getHealing();
+                        this.heal(heal);
                         return ActionResultType.SUCCESS;
                     }
-                    if (!player.isCreative()) {
-                        itemStack.shrink(1);
-                    }
-                    int heal = item.getFood().getHealing();
-                    this.heal(heal);
-                    return ActionResultType.SUCCESS;
                 }
             } else if (!this.func_233678_J__()) {
                 if (this.world.isRemote) {
